@@ -11,7 +11,7 @@ body {
     background-repeat: no-repeat;
     width: 100vw;
     height: 100vh;
-    /* position: relative; */
+    position: relative;
     overflow-y: hidden;
     overflow-x: hidden;
 }
@@ -24,47 +24,62 @@ header .left h1 {
     margin: 0 40px;
 }
 
-.snowman-container{
+.snowman-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .snowman {
-    background:
-        url(snowman1.png);
+    background: url(snowman1.png);
     background-size: auto 100%;
-    width: 280px;
+    width: 300px;
     aspect-ratio: 2 / 2.5;
     position: relative;
     z-index: 100;
     right: 40px;
     bottom: 90px;
-    transform: translateZ(-100%);
+    transition: background-image 0.5s ease-in-out; /* Smooth transition for image change */
 }
 
-.rock{
+.snowman:hover {
+    background: url(snowman2.png);
+    background-size: auto 100%;
+    width: 400px;
+    aspect-ratio: 2 / 2.5;
+    position: relative;
+    z-index: 100;
+    bottom: 100px;
+    left: 20px;
+}
+
+
+.rock {
     position: absolute;
     inset: 0 0 0 0;
     width: 100%;
     pointer-events: none;
 }
-.rock img:nth-child(1){
+
+.rock img:nth-child(1) {
     position: absolute;
     height: 170px;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 20px;
+    bottom: 10px;
     transition: 0.7s;
     z-index: 1;
 }
-.rock img:nth-child(2){
+
+.rock img:nth-child(2) {
     position: absolute;
     height: 50%;
     left: 0;
     bottom: 0;
     transition: 0.7s;
 }
-.rock img:nth-child(3){
+
+.rock img:nth-child(3) {
     position: absolute;
     height: 100%;
     right: 0;
@@ -72,22 +87,26 @@ header .left h1 {
     rotate: -25deg;
     transition: 0.7s;
 }
-.snowman:hover ~ .rock img:nth-child(1) {
+
+.snowman:hover~.rock img:nth-child(1) {
     transform: translateX(-50%) translateY(50px);
 }
-.snowman:hover ~ .rock img:nth-child(2) {
+
+.snowman:hover~.rock img:nth-child(2) {
     transform: translateX(-100px) translateY(100px);
 }
-.snowman:hover ~ .rock img:nth-child(3) {
+
+.snowman:hover~.rock img:nth-child(3) {
     transform: translateX(100px) translateY(100px);
 }
+
 
 .snowflake {
     position: absolute;
     top: -10px;
-    left: 0;
     background-color: white;
     border-radius: 50%;
+    opacity: 0.7;
     pointer-events: none;
     animation: fall linear infinite;
     transform-origin: center;
@@ -95,9 +114,11 @@ header .left h1 {
 
 @keyframes fall {
     0% {
-        transform: translateX(calc(var(--x) - 50vw)) translateY(-10%);
+        transform: translateX(var(--x)) translateY(-100%);
     }
+
     100% {
-        transform: translateX(calc(var(--x) - 50vw)) translateY(110vh);
+        transform: translateX(var(--x)) translateY(100vh);
+        /* Snowflakes fall relative to the body */
     }
 }
